@@ -109,6 +109,9 @@ function mcmcsample(
     initial_state=nothing,
     kwargs...,
 )
+
+    println("abstractMCMC, src, sample.jl")
+    println("mcmcSample thingy")
     # Check the number of requested samples.
     N > 0 || error("the number of samples must be ≥ 1")
     Ntotal = thinning * (N - 1) + discard_initial + 1
@@ -158,11 +161,13 @@ function mcmcsample(
             next_update = itotal + threshold
         end
 
+        println("entering step loop")
         # Step through the sampler.
         for i in 2:N
             # Discard thinned samples.
             for _ in 1:(thinning - 1)
                 # Obtain the next sample and state.
+                println("step inner")
                 sample, state = step(rng, model, sampler, state; kwargs...)
 
                 # Update progress bar.
@@ -173,6 +178,7 @@ function mcmcsample(
             end
 
             # Obtain the next sample and state.
+            # println("step outer")
             sample, state = step(rng, model, sampler, state; kwargs...)
 
             # Run callback.

@@ -88,4 +88,6 @@ include("stepper.jl")
 include("transducer.jl")
 include("logdensityproblems.jl")
 
+println("abstractMCMC, src, abstractMCMC.jl")
+
 end # module AbstractMCMC
